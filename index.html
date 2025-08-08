@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finquimica - Em Breve um Novo Site</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #eaf2f8;
+            color: #0d2c4a;
+            /* Adicionado para o efeito 3D funcionar corretamente */
+            perspective: 1000px;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInSlideUp 1.2s ease-out forwards;
+            /* Adicionada transição para suavizar o efeito 3D */
+            transition: transform 0.1s ease-out;
+        }
+
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-finquimica {
+            /* AUMENTADO EM 40% (250px * 1.4 = 350px) */
+            max-width: 350px;
+            max-height: 168px; /* 120px * 1.4 = 168px */
+            margin-bottom: 40px;
+            mix-blend-mode: multiply;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            color: #0a192f;
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5); 
+        }
+
+        p {
+            font-size: 1.1em;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .contact-info li {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .contact-info a {
+            color: #0d2c4a;
+            text-decoration: none;
+            font-weight: 400;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            border-bottom: 1px solid #0d2c4a;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+            border-bottom: 1px solid transparent;
+        }
+        
+        .whatsapp-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="content-container">
+        
+        <img src="logo-fq.png" alt="Logo Finquimica" class="logo-finquimica">
+        
+        <h1>Estamos em Evolução</h1>
+        <p>
+            Nosso site está sendo reconstruído para oferecer a você uma experiência digital mais moderna, segura e inovadora. Em breve, uma nova Finquimica online.
+        </p>
+
+        <ul class="contact-info">
+            <li>
+                <a href="https://wa.me/5512981381655" class="whatsapp-button" target="_blank">
+                    <img src="logo-whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
+                    Chamar no WhatsApp
+                </a>
+            </li>
+            <li>
+                <strong>Vendas:</strong> <a href="mailto:vendas@finquimica.com.br">vendas@finquimica.com.br</a>
+            </li>
+            <li>
+                <strong>Telefone:</strong> <a href="tel:+551231414040">(12) 3141-4040</a>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#0d2c4a" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#0d2c4a", "opacity": 0.3, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+    <script>
+        const content = document.querySelector('.content-container');
+        document.addEventListener('mousemove', (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+
+            // Ajuste o 'divisor' para controlar a intensidade do efeito
+            const rotateX = -1 * (mouseY / (window.innerHeight / 2)) * 5; // Rotação no eixo X
+            const rotateY = (mouseX / (window.innerWidth / 2)) * 5;      // Rotação no eixo Y
+
+            content.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            content.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+
+</body>
+</html>
