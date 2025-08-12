@@ -62,3 +62,87 @@
             font-weight: 600;
             margin: 0 0 15px 0;
             color: #0a192f;
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5); 
+        }
+
+        p {
+            font-size: 1.1em;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .contact-info { list-style: none; padding: 0; margin-top: 20px; }
+        .contact-info li { margin: 15px 0; font-size: 1.1em; }
+        .contact-info a { color: #0d2c4a; text-decoration: none; font-weight: 400; border-bottom: 1px solid transparent; transition: border-bottom 0.3s ease; }
+        .contact-info a:hover { border-bottom: 1px solid #0d2c4a; }
+
+        .whatsapp-button { display: inline-flex; align-items: center; background-color: #25D366; color: #ffffff; padding: 12px 25px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+        .whatsapp-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3); border-bottom: 1px solid transparent; }
+        .whatsapp-icon { width: 20px; height: 20px; margin-right: 10px; vertical-align: middle; }
+
+        /* --- Bloco para Responsividade Móvel --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            p { font-size: 1em; }
+            .logo-finquimica { max-width: 250px; }
+            .content-container { transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <main class="content-container">
+            
+        <img src="logo-fq.png" alt="Logo Finquimica" class="logo-finquimica">
+        
+        <h1>Estamos em Evolução</h1>
+        <p>
+            Nosso site está sendo reconstruído para oferecer a você uma experiência digital mais moderna, segura e inovadora. Em breve, uma nova Finquimica online.
+        </p>
+
+        <ul class="contact-info">
+            <li>
+                <a href="https://wa.me/5512981381655" class="whatsapp-button" target="_blank">
+                    <img src="logo-whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
+                    Chamar no WhatsApp
+                </a>
+            </li>
+            <li><strong>Vendas:</strong> <a href="mailto:vendas@finquimica.com.br">vendas@finquimica.com.br</a></li>
+            <li><strong>Telefone:</strong> <a href="tel:+551231414040">(12) 3141-4040</a></li>
+        </ul>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', { particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: "#0d2c4a" }, shape: { type: "circle" }, opacity: { value: 0.4, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#0d2c4a", opacity: 0.3, width: 1 }, move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out" } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } }, modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 4 } } }, retina_detect: true });
+        
+        const content = document.querySelector('.content-container');
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+        if (!isMobile) {
+            document.body.addEventListener('mousemove', (e) => {
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                
+                const rotateX = -1 * (mouseY / (window.innerHeight / 2)) * 2; // Reduzi ainda mais a intensidade
+                const rotateY = (mouseX / (window.innerWidth / 2)) * 2;
+                
+                content.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            document.body.addEventListener('mouseleave', () => {
+                content.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        }
+    </script>
+
+</body>
+</html>
