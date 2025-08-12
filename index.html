@@ -7,59 +7,58 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        /* --- ESTRUTURA BASE À PROVA DE FALHAS --- */
-        html {
-            height: 100%;
-            overflow: hidden; /* Previne qualquer overflow no nível do html */
-        }
-
-        body {
-            height: 100%;
+        /* --- ESTRUTURA BASE ROBUSTA --- */
+        html, body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            /* Permite que a altura se ajuste ao conteúdo */
+            height: auto; 
             font-family: 'Poppins', sans-serif;
             background-color: #eaf2f8;
-            color: #0d2c4a;
-            perspective: 1000px;
-            /* O body agora controla o overflow, escondendo barras de rolagem indesejadas */
-            overflow: hidden;
-            position: relative; /* Contexto para o posicionamento dos filhos */
         }
 
-        /* --- Fundo de Partículas --- */
+        /* --- Fundo de Partículas Fixo --- */
         #particles-js {
-            position: absolute; /* Usar absolute em vez de fixed para ficar contido no body */
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            position: fixed; /* Fixo na tela, atrás de todo o conteúdo */
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Coloca o fundo atrás de tudo */
             top: 0;
             left: 0;
         }
         
-        /* --- Container Principal do Conteúdo (Área de Rolagem) --- */
-        .content-scroll-container {
-            position: relative;
-            z-index: 2; /* Fica na frente das partículas */
-            height: 100%;
-            /* Habilita a rolagem vertical APENAS neste container */
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
-        }
-
+        /* --- Container Principal do Conteúdo --- */
         .content-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100%; /* Ocupa no mínimo a altura da viewport */
+            min-height: 100vh; /* Ocupa no mínimo a altura da tela */
             text-align: center;
             padding: 40px 20px;
-            box-sizing: border-box; /* Garante que o padding não cause problemas de layout */
+            box-sizing: border-box; /* Garante que o padding não cause problemas */
             animation: fadeInSlideUp 1.2s ease-out forwards;
             transition: transform 0.1s ease-out;
+            color: #0d2c4a;
+            position: relative; /* Necessário para o contexto de empilhamento */
+            z-index: 1; /* Garante que fique na frente do fundo */
         }
 
         @keyframes fadeInSlideUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Estilos dos Elementos Internos (sem alterações) --- */
+        .logo-finquimica {
+            max-width: 350px;
+            height: auto;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            color: #0a192f;
