@@ -7,42 +7,57 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        /* --- ESTRUTURA BASE ROBUSTA --- */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            /* Permite que a altura se ajuste ao conteúdo */
-            height: auto; 
-            font-family: 'Poppins', sans-serif;
-            background-color: #eaf2f8;
+        /* --- ESTRUTURA BASE À PROVA DE FALHAS --- */
+        html {
+            height: 100%;
+            overflow: hidden; /* Previne qualquer overflow no nível do html */
         }
 
-        /* --- Fundo de Partículas Fixo --- */
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #eaf2f8;
+            color: #0d2c4a;
+            perspective: 1000px;
+            /* O body agora controla o overflow, escondendo barras de rolagem indesejadas */
+            overflow: hidden;
+            position: relative; /* Contexto para o posicionamento dos filhos */
+        }
+
+        /* --- Fundo de Partículas --- */
         #particles-js {
-            position: fixed; /* Fixo na tela, atrás de todo o conteúdo */
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; /* Coloca o fundo atrás de tudo */
+            position: absolute; /* Usar absolute em vez de fixed para ficar contido no body */
+            width: 100%;
+            height: 100%;
+            z-index: 1;
             top: 0;
             left: 0;
         }
         
-        /* --- Container Principal do Conteúdo --- */
+        /* --- Container Principal do Conteúdo (Área de Rolagem) --- */
+        .content-scroll-container {
+            position: relative;
+            z-index: 2; /* Fica na frente das partículas */
+            height: 100%;
+            /* Habilita a rolagem vertical APENAS neste container */
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
+        }
+
         .content-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Ocupa no mínimo a altura da tela */
+            min-height: 100%; /* Ocupa no mínimo a altura da viewport */
             text-align: center;
             padding: 40px 20px;
-            box-sizing: border-box; /* Garante que o padding não cause problemas */
+            box-sizing: border-box; /* Garante que o padding não cause problemas de layout */
             animation: fadeInSlideUp 1.2s ease-out forwards;
             transition: transform 0.1s ease-out;
-            color: #0d2c4a;
-            position: relative; /* Necessário para o contexto de empilhamento */
-            z-index: 1; /* Garante que fique na frente do fundo */
         }
 
         @keyframes fadeInSlideUp {
@@ -83,12 +98,21 @@
         .whatsapp-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3); border-bottom: 1px solid transparent; }
         .whatsapp-icon { width: 20px; height: 20px; margin-right: 10px; vertical-align: middle; }
 
-        /* --- Bloco para Responsividade Móvel --- */
+        /* --- Bloco para Responsividade Móvel (Ajustado) --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            p { font-size: 1em; }
-            .logo-finquimica { max-width: 250px; }
-            .content-container { transform: none !important; }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .logo-finquimica {
+                max-width: 250px;
+            }
+            .content-container {
+                /* Desativa o efeito 3D no celular */
+                transform: none !important;
+            }
         }
     </style>
 </head>
@@ -96,50 +120,57 @@
 
     <div id="particles-js"></div>
 
-    <main class="content-container">
+    <div class="content-scroll-container">
+        <div class="content-container">
             
-        <img src="logo-fq.png" alt="Logo Finquimica" class="logo-finquimica">
-        
-        <h1>Estamos em Evolução</h1>
-        <p>
-            Nosso site está sendo reconstruído para oferecer a você uma experiência digital mais moderna, segura e inovadora. Em breve, uma nova Finquimica online.
-        </p>
+            <img src="logo-fq.png" alt="Logo Finquimica" class="logo-finquimica">
+            
+            <h1>Estamos em Evolução</h1>
+            <p>
+                Nosso site está sendo reconstruído para oferecer a você uma experiência digital mais moderna, segura e inovadora. Em breve, uma nova Finquimica online.
+            </p>
 
-        <ul class="contact-info">
-            <li>
-                <a href="https://wa.me/5512981381655" class="whatsapp-button" target="_blank">
-                    <img src="logo-whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
-                    Chamar no WhatsApp
-                </a>
-            </li>
-            <li><strong>Vendas:</strong> <a href="mailto:vendas@finquimica.com.br">vendas@finquimica.com.br</a></li>
-            <li><strong>Telefone:</strong> <a href="tel:+551231414040">(12) 3141-4040</a></li>
-        </ul>
+            <ul class="contact-info">
+                <li>
+                    <a href="https://wa.me/5512981381655" class="whatsapp-button" target="_blank">
+                        <img src="logo-whatsapp.png" alt="WhatsApp" class="whatsapp-icon">
+                        Chamar no WhatsApp
+                    </a>
+                </li>
+                <li><strong>Vendas:</strong> <a href="mailto:vendas@finquimica.com.br">vendas@finquimica.com.br</a></li>
+                <li><strong>Telefone:</strong> <a href="tel:+551231414040">(12) 3141-4040</a></li>
+            </ul>
 
-    </main>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS('particles-js', { particles: { number: { value: 50, density: { enable: true, value_area: 800 } }, color: { value: "#0d2c4a" }, shape: { type: "circle" }, opacity: { value: 0.4, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#0d2c4a", opacity: 0.3, width: 1 }, move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out" } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } }, modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 4 } } }, retina_detect: true });
         
+        // O Efeito 3D agora é aplicado no container interno
         const content = document.querySelector('.content-container');
+        const scrollContainer = document.querySelector('.content-scroll-container');
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (!isMobile) {
-            document.body.addEventListener('mousemove', (e) => {
-                const centerX = window.innerWidth / 2;
-                const centerY = window.innerHeight / 2;
+            // O listener de mouse agora está no container de rolagem
+            scrollContainer.addEventListener('mousemove', (e) => {
+                const rect = scrollContainer.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
                 const mouseX = e.clientX - centerX;
                 const mouseY = e.clientY - centerY;
                 
-                const rotateX = -1 * (mouseY / (window.innerHeight / 2)) * 2; // Reduzi ainda mais a intensidade
-                const rotateY = (mouseX / (window.innerWidth / 2)) * 2;
+                const rotateX = -1 * (mouseY / (rect.height / 2)) * 3; // Reduzi a intensidade
+                const rotateY = (mouseX / (rect.width / 2)) * 3;
                 
-                content.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                content.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
 
-            document.body.addEventListener('mouseleave', () => {
-                content.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            scrollContainer.addEventListener('mouseleave', () => {
+                content.style.transform = 'rotateX(0deg) rotateY(0deg)';
             });
         }
     </script>
